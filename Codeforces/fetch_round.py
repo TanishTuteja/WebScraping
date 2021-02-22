@@ -15,7 +15,7 @@ baseURL = "https://codeforces.com/problemset/problem/" + contestNum + "/"
 if(not os.path.exists("./" + contestNum)):
     os.mkdir("./" + contestNum)
 
-driver = webdriver.Chrome()
+driver = webdriver.Firefox(executable_path="../drivers/geckodriver.exe")
 
 i = 0
 

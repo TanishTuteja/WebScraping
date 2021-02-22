@@ -1,15 +1,14 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-defaultUsername = "cs1200398"
-myUsername = input("Enter your username (" + defaultUsername + ") ")
+myUsername = ""
 
-if(myUsername == ""):
-    myUsername = defaultUsername
+while(myUsername == ""):
+    myUsername = input("Enter your username ")
 
 myPassword = input("Enter your password ")
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(executable_path="../drivers/chromedriver.exe")
 driver.get("https://moodle.iitd.ac.in/login/index.php")
 
 usernameInput = driver.find_element_by_id("username")
