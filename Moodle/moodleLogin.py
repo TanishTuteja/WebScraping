@@ -1,12 +1,15 @@
+import sys
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-myUsername = ""
+if(not len(sys.argv) == 3):
+    print("Usage: python moodleLogin.py <username> <password>")
+    sys.exit(1)
 
-while(myUsername == ""):
-    myUsername = input("Enter your username ")
+myUsername = sys.argv[1]
 
-myPassword = input("Enter your password ")
+myPassword = sys.argv[2]
 
 driver = webdriver.Chrome(executable_path="../drivers/chromedriver.exe")
 driver.get("https://moodle.iitd.ac.in/login/index.php")
