@@ -3,7 +3,6 @@ import os
 import string
 
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
 def fetchContest(contestNum):
     baseURL = "https://codeforces.com/problemset/problem/" + contestNum + "/"

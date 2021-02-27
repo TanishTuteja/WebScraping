@@ -3,16 +3,13 @@ import os
 import string
 
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
 
-def fetchContest(contestNum):
+def fetchContest(contestNum, driver):
     baseURL = "https://codeforces.com/problemset/problem/" + contestNum + "/"
 
     if(not os.path.exists("./past/" + contestNum)):
         os.mkdir("./past/" + contestNum)
-
-    driver = webdriver.Firefox(executable_path="../drivers/geckodriver.exe")
 
     i = 0
 
@@ -45,8 +42,6 @@ def fetchContest(contestNum):
 
         i += 1
 
-    driver.close()
-
 
 if(not len(sys.argv) == 2):
     print("Usage: python past_contests.py <number_of_contests>")
@@ -64,13 +59,14 @@ if(not os.path.exists("./past")):
 myURL = "https://codeforces.com/contests/page/"
 
 driver = webdriver.Firefox(executable_path="../drivers/geckodriver.exe")
+driver2 = webdriver.Firefox(executable_path="../drivers/geckodriver.exe")
 
 for i in range(pages - 1):
     driver.get(myURL + str(i+1))
     contests = driver.find_elements_by_css_selector(".contests-table tr")
     for j in range(100):
         contestID = contests[j+1].get_attribute("data-contestid")
-        fetchContest(contestID)
+        fetchContest(contestID, driver2)
 
 
 driver.get(myURL + str(pages))
@@ -78,6 +74,7 @@ contests = driver.find_elements_by_css_selector(".contests-table tr")
 
 for j in range(num % 100):
     contestID = contests[j+1].get_attribute("data-contestid")
-    fetchContest(contestID)
+    fetchContest(contestID, driver2)
 
+driver2.close()
 driver.close()
